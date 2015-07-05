@@ -44,11 +44,11 @@ Yep.
 
 = Can I add/edit/delete options records with Options Pixie? =
 
-Nope (We're thinking about a Pro plugin for that, [vote for it here](http://www.bytepixie.com/options-pixie-pro)).
+Nope (We're thinking about a Pro plugin for that, [vote for it here](http://www.bytepixie.com/options-pixie-pro).
 
 = Can I fix broken serialized options records with Options Pixie? =
 
-Nope (We're thinking about a Pro plugin for that, [vote for it here](http://www.bytepixie.com/options-pixie-pro)).
+Nope (We're thinking about a Pro plugin for that, [vote for it here](http://www.bytepixie.com/options-pixie-pro).
 
 == Screenshots ==
 
