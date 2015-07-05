@@ -1,0 +1,80 @@
+/**
+ * Options Pixie CSS.
+ */
+
+/**
+ * Columns.
+ */
+.column-option_id,
+.column-autoload,
+.column-type {
+	width: 10%;
+}
+.column-option_name {
+	width: 20%;
+}
+.column-option_value div.row-actions {
+	clear: both;
+}
+.options-pixie-extra-tablenav:nth-of-type(2) {
+	margin-left: -8px;
+}
+span.error {
+	color: red;
+	font-weight: bold;
+}
+/**
+ * Help.
+ */
+.help-tab-content dt {
+	font-weight: bold;
+}
+.list-view::before {
+	content: '\f163';
+}
+.excerpt-view::before {
+	content: '\f164';
+}
+/**
+ * Rich View.
+ */
+.options-pixie-rich-view {
+	margin: 0;
+	clear: both;
+}
+.options-pixie-rich-view .array {
+	margin: 0;
+}
+.options-pixie-rich-view .array .key {
+	float: left;
+	clear: left;
+	width: 2em;
+	margin: 0.2em 0;
+	padding: 0.1em;
+	background-color: #dddddd;
+	text-align: right;
+}
+.options-pixie-rich-view .array.associative > .key {
+	width: 10em;
+}
+.options-pixie-rich-view .array .key:after {
+	content: ":";
+}
+.options-pixie-rich-view .array .value {
+	float: left;
+	margin: 0.2em;
+	padding: 0.1em;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+.options-pixie-rich-view .array.associative > .value {
+}
+.options-pixie-rich-view .array .value > span.count {
+	color: #999;
+}
+.options-pixie-rich-view .array .value > span.count:hover {
+	cursor: pointer;
+}
+.options-pixie-rich-view .array .value > span.count .dashicons {
+	color: #555;
+}
