@@ -1,4 +1,8 @@
 <?php
+if ( empty( $publish ) ) {
+	return;
+}
+
 echo 'Publish to WP.org? (Y/n) ';
 if ( 'Y' == trim( fgets( STDIN ) ) ) {
 	system( 'svn co -q http://svn.wp-plugins.org/options-pixie svn' );
