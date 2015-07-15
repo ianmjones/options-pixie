@@ -53,6 +53,12 @@ class Options_Pixie_Data_Format {
 	private static function _to_html( $data, $recursion_level = 0 ) {
 		$html = '';
 		if ( is_array( $data ) ) {
+			// Normally data needing conversion to an array is passed.
+			// However, if the passed data is already an array bump the recursion level to start showing its children properly.
+			if ( 0 === $recursion_level ) {
+				$recursion_level = 1;
+			}
+
 			$array_class = '';
 			foreach ( $data as $key => $value ) {
 				if ( ! is_int( $key ) ) {
