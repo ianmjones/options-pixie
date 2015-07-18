@@ -301,7 +301,7 @@ class Options_Pixie_Admin {
 	 */
 	public function screen_settings( $screen_settings, $screen ) {
 		// Only add our extra screen settings when on our screen.
-		if ( empty( $this->page_hook ) || $screen->id !== $this->page_hook ) {
+		if ( empty( $this->page_hook ) || ( $screen->id !== $this->page_hook && $screen->id !== $this->page_hook . '-network' ) ) {
 			return $screen_settings;
 		}
 
