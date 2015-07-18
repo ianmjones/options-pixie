@@ -731,7 +731,7 @@ class Options_Pixie_Admin {
 
 				foreach ( wp_get_sites( array( 'limit' => 0 ) ) as $blog ) {
 					$blog_id     = empty( $blog['blog_id'] ) ? '' : $blog['blog_id'];
-					$description = untrailingslashit( trim( $blog['domain'] ) . '/' . trim( $blog['path'] ) );
+					$description = untrailingslashit( trim( $blog['domain'] ) . trim( $blog['path'] ) );
 
 					$selected = '';
 					if ( $current_blog_id == $blog_id ) {
