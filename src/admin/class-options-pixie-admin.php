@@ -301,7 +301,7 @@ class Options_Pixie_Admin {
 	 */
 	public function screen_settings( $screen_settings, $screen ) {
 		// Only add our extra screen settings when on our screen.
-		if ( empty( $this->page_hook ) || $screen->id !== $this->page_hook ) {
+		if ( empty( $this->page_hook ) || ! $this->our_screen( $screen, $this->page_hook ) ) {
 			return $screen_settings;
 		}
 
@@ -754,5 +754,21 @@ class Options_Pixie_Admin {
 		}
 
 		return $output;
+	}
+
+	/**
+	 * Is the given screen ours?
+	 *
+	 * @param WP_Screen $screen
+	 * @param string    $page_hook
+	 *
+	 * @return bool
+	 */
+	public static function our_screen( $screen, $page_hook ) {
+		if ( ! empty( $screen->id ) && ! empty( $page_hook ) && ( $screen->id === $page_hook || $screen->id === $page_hook . '-network' ) ) {
+			return true;
+		}
+
+		return false;
 	}
 }

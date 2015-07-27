@@ -59,6 +59,7 @@ Nope (We're thinking about a Pro plugin for that, [vote for it here](http://www.
 
 = 1.0.1 =
 * Fix: Removed extra "/" displayed in multisite selector values for path based multisites.
+* Fix: Remember Search & Sort checkbox now shown properly in Screen Options panel for multisites.
 
 = 1.0 =
 * Initial release.
