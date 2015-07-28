@@ -404,12 +404,11 @@ class Options_Pixie_List_Table extends WP_List_Table {
 
 		// Get the user's saved options when no parameters given (clean page load).
 		// Because WP_List_Table is very reliant on $_GET we can't do much with this though and must redirect.
-		$remember_search = true;
 		$options         = get_user_option( 'options_pixie_options' );
 		$remember_search = isset( $options['remember_search'] ) ? $options['remember_search'] : true;
 
 		$retrieved_options = false;
-		if ( ! isset( $_REQUEST['orderby'] ) ) {
+		if ( ! isset( $_REQUEST['mode'] ) ) {
 			if ( false !== $options && $remember_search ) {
 				$retrieved_options = true;
 
