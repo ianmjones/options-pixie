@@ -111,4 +111,29 @@ class DataFormatTest extends \WP_UnitTestCase {
 		$result = Options_Pixie_Data_Format::is_expandable( $input );
 		$this->assertTrue( $result );
 	}
+
+	/**
+	 * Check that is_broken_serialized function exists (as a static function).
+	 */
+	public function test_is_broken_serialized_exists() {
+		$this->assertTrue( method_exists( 'Options_Pixie_Data_Format', 'is_broken_serialized' ) );
+	}
+
+	/**
+	 * @depends test_is_broken_serialized_exists
+	 */
+	public function test_is_broken_serialized_with_broken_serialized() {
+		$input  = 'a:1:{s:1:"two";s:2:"four";}';
+		$result = Options_Pixie_Data_Format::is_broken_serialized( $input );
+		$this->assertTrue( $result );
+	}
+
+	/**
+	 * @depends test_is_broken_serialized_exists
+	 */
+	public function test_is_broken_serialized_with_clean_serialized() {
+		$input  = 'a:1:{s:3:"two";s:4:"four";}';
+		$result = Options_Pixie_Data_Format::is_broken_serialized( $input );
+		$this->assertFalse( $result );
+	}
 }
