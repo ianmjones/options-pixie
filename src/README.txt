@@ -3,7 +3,7 @@ Contributors: ianmjones
 Donate link: http://www.bytepixie.com/
 Tags: options, admin, administration, search, sort, filter
 Requires at least: 3.9
-Tested up to: 4.2.2
+Tested up to: 4.3
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -61,6 +61,7 @@ Nope (We're thinking about a Pro plugin for that, [vote for it here](http://www.
 * Fix: Removed extra "/" displayed in multisite selector values for path based multisites.
 * Fix: Remember Search & Sort checkbox now shown properly in Screen Options panel for multisites.
 * Fix: Very first Search or Switch Site button usage now works as expected.
+* Tested: WordPress 4.3
 
 = 1.0 =
 * Initial release.
