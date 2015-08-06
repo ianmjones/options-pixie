@@ -136,4 +136,54 @@ class DataFormatTest extends \WP_UnitTestCase {
 		$result = Options_Pixie_Data_Format::is_broken_serialized( $input );
 		$this->assertFalse( $result );
 	}
+
+	/**
+	 * Check that is_base64 function exists (as a static function).
+	 */
+	public function test_is_base64_exists() {
+		$this->assertTrue( method_exists( 'Options_Pixie_Data_Format', 'is_base64' ) );
+	}
+
+	/**
+	 * @depends test_is_base64_exists
+	 */
+	public function test_is_base64_likes_encoded_serialized_array() {
+		$input  = array( "one" => 1, "two" => 2, "three" => 3 );
+		$input = serialize( $input );
+		$input = base64_encode( $input );
+		$result = Options_Pixie_Data_Format::is_base64( $input );
+		$this->assertTrue( $result );
+	}
+
+	/**
+	 * @depends test_is_base64_exists
+	 */
+	public function test_is_base64_likes_encoded_serialized_object() {
+		$input  = new stdClass();
+		$input->Hello = 'World';
+		$input = serialize( $input );
+		$input = base64_encode( $input );
+		$result = Options_Pixie_Data_Format::is_base64( $input );
+		$this->assertTrue( $result );
+	}
+
+	/**
+	 * @depends test_is_base64_exists
+	 */
+	public function test_is_base64_likes_encoded_serialized_json() {
+		$input  = '{"string": "some text", "int": 123}';
+		$input = base64_encode( $input );
+		$result = Options_Pixie_Data_Format::is_base64( $input );
+		$this->assertTrue( $result );
+	}
+
+	/**
+	 * @depends test_is_base64_exists
+	 */
+	public function test_is_base64_dislikes_encoded_string() {
+		$input  = 'I am a string.';
+		$input = base64_encode( $input );
+		$result = Options_Pixie_Data_Format::is_base64( $input );
+		$this->assertFalse( $result );
+	}
 }
