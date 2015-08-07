@@ -1,7 +1,27 @@
 # [Options Pixie](https://wordpress.org/plugins/options-pixie/)
 [![Build Status](https://img.shields.io/travis/bytepixie/options-pixie/develop.svg)](https://travis-ci.org/bytepixie/options-pixie) [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/bytepixie/options-pixie.svg)](https://scrutinizer-ci.com/g/bytepixie/options-pixie/) [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/bytepixie/options-pixie.svg)](https://scrutinizer-ci.com/g/bytepixie/options-pixie/) [![License](https://img.shields.io/badge/license-GPL--2.0%2B-green.svg)](https://github.com/bytepixie/options-pixie/blob/master/src/LICENSE.txt)
 
-A WordPress plugin to list, filter, sort and view options records, even serialized and base64 encoded.
+A WordPress plugin to list, sort, search and view your WordPress site's options records with style.
+
+* List, sort and search options
+* "Rich view" of serialized and JSON string values
+* Works with base64 encoded serialized and JSON string values
+* Highlights broken serialized values
+* Supports Multisites
+
+With Options Pixie you can find out what is really going on with your WordPress options.
+
+Your wp_options table holds nearly all the settings that govern how your WordPress site looks and works, and if things aren't working quite as expected it's good to be able to peak into these records right in your site's admin dashboard.
+
+Options Pixie highlights broken serialized values, showing you exactly where that string buried deep in a setting and supposed to be say 128 characters long is actually only 127, something that is otherwise hard to spot.
+
+The Rich View takes those long unwieldy strings of serialized or JSON data and turns them into neat expandable lists of key/value pairs, much easier to read and understand.
+
+Also with Rich View you can drill into those otherwise opaque base64 encoded values, Options Pixie decodes them to show you the serialized data, JSON string or object hidden within.
+
+When installed on a WordPress Multisite it is activated at the network level, with a site selector shown above the list of records to enable switching between the options tables for each subsite.
+
+The usual search and sort functionality you expect from an admin page are there to help you find the records you need, including filter links to switch between seeing all options records, permanent records only or transient options only.
 
 ## Installing
 ### From your WordPress dashboard

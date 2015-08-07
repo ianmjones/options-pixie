@@ -3,7 +3,7 @@
 /**
  * The dashboard-specific functionality of the plugin.
  *
- * @link       http://www.bytepixie.com/options-pixie/
+ * @link       https://www.bytepixie.com/options-pixie/
  * @since      1.0
  *
  * @package    Options_Pixie
