@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       http://www.bytepixie.com/options-pixie/
+ * @link       https://www.bytepixie.com/options-pixie/
  * @since      1.0
  *
  * @package    Options_Pixie

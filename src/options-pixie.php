@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @link              http://www.bytepixie.com/options-pixie/
+ * @link              https://www.bytepixie.com/options-pixie/
  * @since             1.0
  * @package           Options_Pixie
  *
  * @wordpress-plugin
  * Plugin Name:       Options Pixie
- * Plugin URI:        http://www.bytepixie.com/options-pixie/
+ * Plugin URI:        https://www.bytepixie.com/options-pixie/
  * Description:       List, filter, sort and view options records, even serialized and base64 encoded values.
  * Version:           1.0.1-dev
  * Author:            Byte Pixie
- * Author URI:        http://www.bytepixie.com/
+ * Author URI:        https://www.bytepixie.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       options-pixie
