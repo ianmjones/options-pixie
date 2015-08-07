@@ -186,4 +186,54 @@ class DataFormatTest extends \WP_UnitTestCase {
 		$result = Options_Pixie_Data_Format::is_base64( $input );
 		$this->assertFalse( $result );
 	}
+
+	/**
+	 * Check that get_data_types function exists (as a static function).
+	 */
+	public function test_get_data_types_exists() {
+		$this->assertTrue( method_exists( 'Options_Pixie_Data_Format', 'get_data_types' ) );
+	}
+
+	/**
+	 * @depends test_get_data_types_exists
+	 */
+	public function test_get_data_types_with_base64_encoded_serialized() {
+		$input  = array( "one" => 1, "two" => 2, "three" => 3 );
+		$input = serialize( $input );
+		$input = base64_encode( $input );
+		$result = Options_Pixie_Data_Format::get_data_types( $input );
+		$this->assertContains( 'b64', $result, 'contains b64' );
+		$this->assertContains( 'S', $result, 'contains S' );
+	}
+
+	/**
+	 * @depends test_get_data_types_exists
+	 */
+	public function test_get_data_types_with_object() {
+		$input  = new stdClass();
+		$input->Hello = 'World';
+		$result = Options_Pixie_Data_Format::get_data_types( $input );
+		$this->assertContains( 'O', $result, 'contains O' );
+	}
+
+	/**
+	 * @depends test_get_data_types_exists
+	 */
+	public function test_get_data_types_base64_encoded_json() {
+		$input  = '{"string": "some text", "int": 123}';
+		$input = base64_encode( $input );
+		$result = Options_Pixie_Data_Format::get_data_types( $input );
+		$this->assertContains( 'b64', $result, 'contains b64' );
+		$this->assertContains( 'J', $result, 'contains J' );
+	}
+
+	/**
+	 * @depends test_get_data_types_exists
+	 */
+	public function test_get_data_types_with_broken_serialized() {
+		$input  = 'a:1:{s:1:"two";s:2:"four";}';
+		$result = Options_Pixie_Data_Format::get_data_types( $input );
+		$this->assertContains( 'S', $result, 'contains S' );
+		$this->assertContains( '!!!', $result, 'contains !!!' );
+	}
 }
