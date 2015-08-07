@@ -69,7 +69,7 @@ class Options_Pixie {
 	public function __construct() {
 
 		$this->options_pixie = 'options-pixie';
-		$this->version       = '1.0.1-dev';
+		$this->version       = '1.0.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
