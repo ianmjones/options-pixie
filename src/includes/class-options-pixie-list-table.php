@@ -23,7 +23,17 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
  */
 class Options_Pixie_List_Table extends WP_List_Table {
 
-	function __construct() {
+	/**
+	 * The Screen ID of the admin page.
+	 *
+	 * @access private
+	 * @var string $page_hook The Screen ID of the admin page.
+	 */
+	private $page_hook;
+
+	function __construct( $page_hook ) {
+		$this->page_hook = $page_hook;
+
 		// Set parent defaults.
 		parent::__construct(
 			array(
@@ -32,6 +42,7 @@ class Options_Pixie_List_Table extends WP_List_Table {
 				'ajax'     => true, // Does this table support ajax?
 			)
 		);
+		add_filter( 'list_table_primary_column', array( $this, 'list_table_primary_column' ), 10, 2 );
 	}
 
 	/**
@@ -47,6 +58,17 @@ class Options_Pixie_List_Table extends WP_List_Table {
 		$output = apply_filters( 'options_pixie_extra_tablenav', $output, $which );
 
 		echo $output;
+	}
+
+	/**
+	 * Returns the name of the default column to show when list table collapsed to single column.
+	 */
+	public function list_table_primary_column( $default, $page_hook ) {
+		if ( $page_hook === $this->page_hook ) {
+			$default = 'option_name';
+		}
+
+		return $default;
 	}
 
 	/**
