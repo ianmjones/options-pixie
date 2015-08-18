@@ -71,6 +71,10 @@ Nope (We're thinking about a Pro plugin for that, [vote for it here](https://www
 
 == Changelog ==
 
+= 1.0.2 =
+* Change: Header text now complies with WordPress 4.3 changes, but remains backwards compatible.
+* Change: Primary column set to "Option Name" in WordPress 4.3.
+
 = 1.0.1 =
 * Fix: Removed extra "/" displayed in multisite selector values for path based multisites.
 * Fix: Remember Search & Sort checkbox now shown properly in Screen Options panel for multisites.

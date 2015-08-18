@@ -358,7 +358,7 @@ class Options_Pixie_Admin {
 	 * @since 1.0
 	 */
 	public function display_admin_page() {
-		$options_pixie_list_table = new Options_Pixie_List_Table();
+		$options_pixie_list_table = new Options_Pixie_List_Table( $this->page_hook );
 		$options_pixie_list_table->prepare_items();
 
 		include plugin_dir_path( __FILE__ ) . 'partials/options-pixie-admin-display.php';
