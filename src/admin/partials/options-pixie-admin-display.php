@@ -28,6 +28,11 @@
 
 	<form id="options-pixie-form" method="post">
 		<?php
+		if ( ! empty( $_REQUEST['_options_pixie_nonce'] ) ) {
+			?>
+			<input type="hidden" name="_options_pixie_nonce" id="_options_pixie_nonce" value="<?php echo esc_attr( $_REQUEST['_options_pixie_nonce'] ) ?>"/>
+			<?php
+		}
 		if ( ! empty( $_REQUEST['blog_id'] ) ) {
 			?>
 			<input type="hidden" name="current_blog_id" id="current-blog-id" value="<?php echo esc_attr( $_REQUEST['blog_id'] ) ?>"/>
