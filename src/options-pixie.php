@@ -9,7 +9,7 @@
  * Plugin Name:       Options Pixie
  * Plugin URI:        https://www.bytepixie.com/options-pixie/
  * Description:       List, filter, sort and view options records, even serialized and base64 encoded values.
- * Version:           1.0.1
+ * Version:           1.0.2-dev
  * Author:            Byte Pixie
  * Author URI:        https://www.bytepixie.com/
  * License:           GPL-2.0+

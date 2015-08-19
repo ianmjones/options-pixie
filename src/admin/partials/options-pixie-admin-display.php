@@ -11,18 +11,24 @@
  * @package    Options_Pixie
  * @subpackage Options_Pixie/admin/partials
  */
+
+global $wp_version;
+$header_tag = 'h1';
+if ( version_compare( $wp_version, '4.3-dev', '<' ) ) {
+	$header_tag = 'h2';
+}
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
-	<h2>
-		<?php
-		echo apply_filters( 'options_pixie_admin_title', __( 'Options Pixie', 'options-pixie' ) );
-		if ( ! empty( $_REQUEST['s'] ) ) {
-			printf( ' <span class="subtitle">' . __( 'Search results for &#8220;%s&#8221;' ) . '</span>', esc_attr( $_REQUEST['s'] ) );
-		}
-		?>
-	</h2>
+	<?php
+	echo "<$header_tag>";
+	echo apply_filters( 'options_pixie_admin_title', __( 'Options Pixie', 'options-pixie' ) );
+	if ( ! empty( $_REQUEST['s'] ) ) {
+		printf( ' <span class="subtitle">' . __( 'Search results for &#8220;%s&#8221;' ) . '</span>', esc_attr( $_REQUEST['s'] ) );
+	}
+	echo "</$header_tag>";
+	?>
 
 	<?php $options_pixie_list_table->views(); ?>
 
