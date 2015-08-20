@@ -400,7 +400,8 @@ class Options_Pixie_List_Table extends WP_List_Table {
 		}
 
 		if ( ! empty( $action ) && ! empty( $ids ) ) {
-			do_action( 'options_pixie_process_bulk_action', $action, $ids );
+			$blog_id = empty( $_REQUEST['blog_id'] ) ? '' : sanitize_key( $_REQUEST['blog_id'] );
+			do_action( 'options_pixie_process_bulk_action', $action, $ids, $blog_id );
 		}
 	}
 
@@ -415,8 +416,10 @@ class Options_Pixie_List_Table extends WP_List_Table {
 		$user   = get_current_user_id();
 		$screen = get_current_screen();
 
-		// Process the bulk action before doing any queries etc.
-		$this->process_bulk_action();
+		$verified = false;
+		if ( ! empty( $_REQUEST['_options_pixie_nonce'] ) && wp_verify_nonce( $_REQUEST['_options_pixie_nonce'], 'options-pixie-nonce' ) ) {
+			$verified = true;
+		}
 
 		// Register the Columns.
 		$columns               = $this->get_columns();
@@ -426,11 +429,12 @@ class Options_Pixie_List_Table extends WP_List_Table {
 
 		// Get the user's saved options when no parameters given (clean page load).
 		// Because WP_List_Table is very reliant on $_GET we can't do much with this though and must redirect.
-		$options         = get_user_option( 'options_pixie_options' );
-		$remember_search = isset( $options['remember_search'] ) ? $options['remember_search'] : true;
-
 		$retrieved_options = false;
-		if ( ! isset( $_REQUEST['mode'] ) ) {
+		$remember_search   = true;
+		if ( ! $verified ) {
+			$options         = get_user_option( 'options_pixie_options' );
+			$remember_search = isset( $options['remember_search'] ) ? $options['remember_search'] : true;
+
 			if ( false !== $options && $remember_search ) {
 				$retrieved_options = true;
 
@@ -468,8 +472,17 @@ class Options_Pixie_List_Table extends WP_List_Table {
 		// Update the current URI with the new options.
 		$_SERVER['REQUEST_URI'] = add_query_arg( $options, $_SERVER['REQUEST_URI'] );
 
+		// Add nonce to URL.
+		$nonce                  = wp_create_nonce( 'options-pixie-nonce' );
+		$_SERVER['REQUEST_URI'] = add_query_arg( '_options_pixie_nonce', $nonce, $_SERVER['REQUEST_URI'] );
+
 		if ( $retrieved_options ) {
 			wp_redirect( $_SERVER['REQUEST_URI'] );
+		}
+
+		// Process the bulk action before doing any queries etc.
+		if ( $verified ) {
+			$this->process_bulk_action();
 		}
 
 		// Build the query from parameters.
@@ -559,7 +572,7 @@ class Options_Pixie_List_Table extends WP_List_Table {
 
 		$out = '<div class="' . ( $always_visible ? 'row-actions visible' : 'row-actions' ) . '">';
 		foreach ( $actions as $action => $link ) {
-			++ $i;
+			++$i;
 			( $i == $action_count ) ? $sep = '' : $sep = ' | ';
 			$out .= "<span class='$action'>$link$sep</span>";
 		}
