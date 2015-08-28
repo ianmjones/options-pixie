@@ -476,7 +476,8 @@ class Options_Pixie_List_Table extends WP_List_Table {
 		$nonce                  = wp_create_nonce( 'options-pixie-nonce' );
 		$_SERVER['REQUEST_URI'] = add_query_arg( '_options_pixie_nonce', $nonce, $_SERVER['REQUEST_URI'] );
 
-		if ( $retrieved_options ) {
+		// If we didn't get a nonce value redirect so that it is set and WP_List_Table's reliance on $_GET is satisfied.
+		if ( ! $verified ) {
 			wp_redirect( $_SERVER['REQUEST_URI'] );
 		}
 
