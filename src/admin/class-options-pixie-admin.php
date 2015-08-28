@@ -345,8 +345,8 @@ class Options_Pixie_Admin {
 	 * @return mixed
 	 */
 	public function manage_screen_columns( $columns ) {
-		$columns['option_id'] = __( 'Option ID', 'options-pixie' );
 		$columns['type']      = __( 'Type', 'options-pixie' );
+		$columns['option_id'] = __( 'Option ID', 'options-pixie' );
 		$columns['autoload']  = __( 'Autoload', 'options-pixie' );
 
 		return $columns;
