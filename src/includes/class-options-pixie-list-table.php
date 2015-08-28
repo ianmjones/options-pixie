@@ -83,9 +83,9 @@ class Options_Pixie_List_Table extends WP_List_Table {
 	 */
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
-			case 'option_id':
 			case 'option_name':
 			case 'option_value':
+			case 'option_id':
 			case 'autoload':
 				return esc_attr( $item->$column_name );
 				break;
@@ -246,10 +246,10 @@ class Options_Pixie_List_Table extends WP_List_Table {
 			$columns['cb'] = '<input type="checkbox" />'; // Render a checkbox instead of text.
 		}
 
-		$columns['option_id']    = __( 'Option ID', 'options-pixie' );
 		$columns['option_name']  = __( 'Option Name', 'options-pixie' );
 		$columns['option_value'] = __( 'Option Value', 'options-pixie' );
 		$columns['type']         = __( 'Type', 'options-pixie' );
+		$columns['option_id']    = __( 'Option ID', 'options-pixie' );
 		$columns['autoload']     = __( 'Auto Load', 'options-pixie' );
 
 		return $columns;
@@ -278,9 +278,9 @@ class Options_Pixie_List_Table extends WP_List_Table {
 			$default_sort = true;
 		}
 		$sortable_columns = array(
-			'option_id'    => array( 'option_id', $default_sort ), // true means it's already sorted.
-			'option_name'  => array( 'option_name', false ),
+			'option_name'  => array( 'option_name', $default_sort ), // true means it's already sorted.
 			'option_value' => array( 'option_value', false ),
+			'option_id'    => array( 'option_id', false ),
 			'autoload'     => array( 'autoload', false ),
 		);
 
@@ -463,7 +463,7 @@ class Options_Pixie_List_Table extends WP_List_Table {
 		}
 
 		// Default the record ordering if not set.
-		$options['orderby'] = empty( $options['orderby'] ) ? 'option_id' : $options['orderby'];
+		$options['orderby'] = empty( $options['orderby'] ) ? 'option_name' : $options['orderby'];
 		$options['order']   = empty( $options['order'] ) ? 'asc' : $options['order'];
 
 		// Save the user's selected options so they get them when they return.
@@ -476,7 +476,8 @@ class Options_Pixie_List_Table extends WP_List_Table {
 		$nonce                  = wp_create_nonce( 'options-pixie-nonce' );
 		$_SERVER['REQUEST_URI'] = add_query_arg( '_options_pixie_nonce', $nonce, $_SERVER['REQUEST_URI'] );
 
-		if ( $retrieved_options ) {
+		// If we didn't get a nonce value redirect so that it is set and WP_List_Table's reliance on $_GET is satisfied.
+		if ( ! $verified ) {
 			wp_redirect( $_SERVER['REQUEST_URI'] );
 		}
 
