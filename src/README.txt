@@ -3,7 +3,7 @@ Contributors: ianmjones
 Donate link: https://www.bytepixie.com/
 Tags: options, wp_options, admin, administration, search, sort, filter
 Requires at least: 3.9
-Tested up to: 4.3
+Tested up to: 4.4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -75,7 +75,7 @@ Nope (We're thinking about a Pro plugin for that, [vote for it here](https://www
 * Change: Header text now complies with WordPress 4.3 changes, but remains backwards compatible.
 * Change: Primary column set to "Option Name" in WordPress 4.3.
 * Change: Security improvements.
-* Change: "Option ID" column moved away from first column to get around bug WordPress 4.3's mobile view.
+* Change: "Option ID" column moved away from first column to get around a bug in WordPress 4.3's mobile view.
 * Change: Records now sorted by the "Option Name" column by default.
 * Fix: Ensure default sort column shows the sort indicator on very first usage.
 

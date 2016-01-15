@@ -80,13 +80,11 @@ class Options_Pixie_Data_Format {
 				$html .= '<dd class="value">' . Options_Pixie_Data_Format::_to_html( $value, $recursion_level + 1 ) . '</dd>';
 			}
 			$html .= '</dl>';
+		} elseif ( Options_Pixie_Data_Format::is_broken_serialized( $data ) ) {
+			$html .= preg_replace_callback( '/s:(\d+):"(.*?)";/', array( 'Options_Pixie_Data_Format', '_highlight_broken_serialized_string' ), $data );
 		} elseif ( is_serialized( $data ) ) {
-			if ( Options_Pixie_Data_Format::is_broken_serialized( $data ) ) {
-				$html .= preg_replace_callback( '/s:(\d+):"(.*?)";/', array( 'Options_Pixie_Data_Format', '_highlight_broken_serialized_string' ), $data );
-			} else {
-				$value = unserialize( $data );
-				$html .= Options_Pixie_Data_Format::_to_html( $value, $recursion_level + 1 );
-			}
+			$value = unserialize( $data );
+			$html .= Options_Pixie_Data_Format::_to_html( $value, $recursion_level + 1 );
 		} elseif ( is_object( $data ) ) {
 			// The top level object should not be treated as an expandable array.
 			if ( 1 === $recursion_level ) {
@@ -252,10 +250,12 @@ class Options_Pixie_Data_Format {
 	public static function is_broken_serialized( $data ) {
 		$broken = false;
 
-		$value = @unserialize( $data );
+		if ( is_serialized( $data ) ) {
+			$value = @unserialize( $data );
 
-		if ( false === $value && serialize( false ) !== $value ) {
-			$broken = true;
+			if ( false === $value && serialize( false ) !== $value ) {
+				$broken = true;
+			}
 		}
 
 		return $broken;
