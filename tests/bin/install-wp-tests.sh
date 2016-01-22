@@ -12,6 +12,12 @@ DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 DROP_DB=${6-false}
 
+if [[ -z "${WP_TESTS_BRANCH}" && "latest" != "$WP_VERSION" ]]
+then
+	WP_TESTS_BRANCH="branches/${WP_VERSION}"
+fi
+
+WP_TESTS_BRANCH="${WP_TESTS_BRANCH-trunk}"
 WP_TESTS_DIR="${WP_TESTS_DIR-/tmp/wordpress-tests-lib}"
 WP_CORE_DIR="${WP_CORE_DIR-/tmp/wordpress/}"
 
@@ -51,12 +57,12 @@ install_test_suite() {
 
 	if [ ! -d ./includes ]
 	then
-		svn co --quiet http://develop.svn.wordpress.org/trunk/tests/phpunit/includes/
+		svn co --quiet http://develop.svn.wordpress.org/${WP_TESTS_BRANCH}/tests/phpunit/includes/
 	fi
 
 	if [ ! -f wp-tests-config-sample.php ]
 	then
-		curl -sSL http://develop.svn.wordpress.org/trunk/wp-tests-config-sample.php -o wp-tests-config-sample.php
+		curl -sSL http://develop.svn.wordpress.org/${WP_TESTS_BRANCH}/wp-tests-config-sample.php -o wp-tests-config-sample.php
 	fi
 	cp wp-tests-config-sample.php wp-tests-config.php
 	sed $ioption "s:dirname( __FILE__ ) . '/src/':'$WP_CORE_DIR':" wp-tests-config.php
