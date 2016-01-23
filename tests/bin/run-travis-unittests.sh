@@ -5,7 +5,7 @@ RUN_CMD="tests/bin/run-unittests.sh -d wordpress_test -u travis -h 127.0.0.1"
 #
 # Only run coverage check for one build as it's quite slow.
 #
-if [ "latest" == "${WP_VERSION}" -a "0" == "${WP_MULTISITE}" -a "5.6" == "${TRAVIS_PHP_VERSION}" ]
+if [ "3.9" == "${WP_VERSION}" -a "0" == "${WP_MULTISITE}" -a "5.3" == "${TRAVIS_PHP_VERSION}" ]
 then
 	bash ${RUN_CMD} -c /tmp/clover.xml
 
