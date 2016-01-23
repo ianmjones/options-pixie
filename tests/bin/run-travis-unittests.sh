@@ -10,7 +10,7 @@ then
 	bash ${RUN_CMD} -c /tmp/clover.xml
 
 	# Send coverage to Scrutinizer CI.
-	php vendor/bin/coveralls -v -x /tmp/clover.xml
+	php vendor/bin/coveralls -v -c tests/cfg/.coveralls-travis.yml -x /tmp/clover.xml
 else
 	bash ${RUN_CMD}
 fi
