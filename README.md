@@ -1,5 +1,5 @@
 # [Options Pixie](https://wordpress.org/plugins/options-pixie/)
-[![Build Status](https://img.shields.io/travis/bytepixie/options-pixie/develop.svg)](https://travis-ci.org/bytepixie/options-pixie) [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/bytepixie/options-pixie.svg)](https://scrutinizer-ci.com/g/bytepixie/options-pixie/) [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/bytepixie/options-pixie.svg)](https://scrutinizer-ci.com/g/bytepixie/options-pixie/) [![License](https://img.shields.io/badge/license-GPL--2.0%2B-green.svg)](https://github.com/bytepixie/options-pixie/blob/master/src/LICENSE.txt)
+[![Build Status](https://travis-ci.org/bytepixie/options-pixie.svg?branch=develop)](https://travis-ci.org/bytepixie/options-pixie) [![Coverage Status](https://coveralls.io/repos/github/bytepixie/options-pixie/badge.svg?branch=develop)](https://coveralls.io/github/bytepixie/options-pixie?branch=develop) [![License](https://img.shields.io/badge/license-GPL--2.0%2B-green.svg)](https://github.com/bytepixie/options-pixie/blob/master/src/LICENSE.txt)
 
 A WordPress plugin to list, sort, search and view your WordPress site's options records with style.
 
