@@ -385,23 +385,31 @@ class Options_Pixie_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Handles bulk action submits.
+	 * Handles row and bulk action requests.
 	 *
 	 * @see   $this->prepare_items()
 	 *
 	 * @since 1.0
 	 */
-	public function process_bulk_action() {
+	public function process_action() {
 		$action = $this->current_action();
 
 		$ids = array();
-		if ( isset( $_REQUEST[ $this->_args['singular'] ] ) && is_array( $_REQUEST[ $this->_args['singular'] ] ) ) {
+		if ( isset( $_REQUEST[ $this->_args['singular'] ] ) && ! empty( $_REQUEST[ $this->_args['singular'] ] ) ) {
 			$ids = $_REQUEST[ $this->_args['singular'] ];
 		}
 
+		$redirect = false;
+
 		if ( ! empty( $action ) && ! empty( $ids ) ) {
-			$blog_id = empty( $_REQUEST['blog_id'] ) ? '' : sanitize_key( $_REQUEST['blog_id'] );
-			do_action( 'options_pixie_process_bulk_action', $action, $ids, $blog_id );
+			$blog_id  = empty( $_REQUEST['blog_id'] ) ? '' : sanitize_key( $_REQUEST['blog_id'] );
+			$redirect = apply_filters( 'options_pixie_process_action', $redirect, $action, $ids, $blog_id );
+		}
+
+		if ( $redirect ) {
+			$_SERVER['REQUEST_URI'] = remove_query_arg( $this->_args['singular'], $_SERVER['REQUEST_URI'] );
+			$_SERVER['REQUEST_URI'] = remove_query_arg( array( 'action', 'action2' ), $_SERVER['REQUEST_URI'] );
+			wp_redirect( $_SERVER['REQUEST_URI'] );
 		}
 	}
 
@@ -481,9 +489,9 @@ class Options_Pixie_List_Table extends WP_List_Table {
 			wp_redirect( $_SERVER['REQUEST_URI'] );
 		}
 
-		// Process the bulk action before doing any queries etc.
+		// Process the row or bulk action before doing any queries etc.
 		if ( $verified ) {
-			$this->process_bulk_action();
+			$this->process_action();
 		}
 
 		// Build the query from parameters.
