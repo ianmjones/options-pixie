@@ -166,6 +166,7 @@ class Options_Pixie {
 		}
 		$this->loader->add_action( 'options_pixie_admin_page_hooked', $plugin_admin, 'admin_page_hooked' );
 		$this->loader->add_filter( 'set-screen-option', $plugin_admin, 'set_records_per_page_option', 10, 3 );
+		$this->loader->add_filter( 'options_pixie_admin_page_footer', $plugin_admin, 'get_admin_page_footer' );
 
 		$this->loader->add_filter( 'options_pixie_get_query_string', $plugin_admin, 'get_query_string', 10, 2 );
 		$this->loader->add_filter( 'options_pixie_get_count', $plugin_admin, 'get_count', 10, 2 );

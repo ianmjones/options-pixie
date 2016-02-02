@@ -771,4 +771,24 @@ class Options_Pixie_Admin {
 
 		return false;
 	}
+
+	/**
+	 * Handler for the options_pixie_admin_page_footer filter.
+	 *
+	 * @param string $content Current footer content to be appended to, or replaced.
+	 *
+	 * @return string
+	 */
+	public function get_admin_page_footer( $content ) {
+		$content .= '
+			<div class="clear">
+				<p>
+					Like Options Pixie? You\'ll <strong>LOVE</strong> <a href="https://www.bytepixie.com/options-pixie-pro/" target="_blank">Options Pixie Pro</a>. <strong>Add</strong>, <strong>edit</strong>, <strong>delete</strong> and <strong>fix</strong> your WordPress site\'s options records with style.
+					<a href="https://www.bytepixie.com/options-pixie-pro/" class="button button-primary regular" target="_blank">Buy Now!</a>
+				</p>
+			</div>
+			';
+
+		return $content;
+	}
 }
