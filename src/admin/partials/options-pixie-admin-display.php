@@ -56,7 +56,7 @@ if ( version_compare( $wp_version, '4.3-dev', '<' ) ) {
 		}
 		$options_pixie_list_table->search_box( __( 'Search', 'options-pixie' ), 'option' );
 		$options_pixie_list_table->display();
-		echo apply_filters( 'options_pixie_admin_page_footer', '' );
 		?>
 	</form>
+	<?php echo apply_filters( 'options_pixie_admin_page_footer', '' ); ?>
 </div>

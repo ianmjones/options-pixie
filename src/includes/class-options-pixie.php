@@ -223,4 +223,24 @@ class Options_Pixie {
 	public function get_version() {
 		return $this->version;
 	}
+
+	/**
+	 * Returns the admin url that can be used to update the plugin.
+	 *
+	 * @return string
+	 */
+	public function get_update_url() {
+		$basename = plugin_basename( plugin_dir_path( dirname( __FILE__ ) ) . '/options-pixie.php' );
+
+		return wp_nonce_url( network_admin_url( 'update.php?action=upgrade-plugin&plugin=' . urlencode( $basename ) ), 'upgrade-plugin_' . $basename );
+	}
+
+	/**
+	 * Returns an HTML link that can be used to update the plugin.
+	 *
+	 * @return string
+	 */
+	public function get_update_link() {
+		return sprintf( '<a href="%1$s">%2$s</a>', $this->get_update_url(), _x( 'Update Options Pixie Now', 'Download and install a new version of the plugin', 'options-pixie' ) );
+	}
 }
