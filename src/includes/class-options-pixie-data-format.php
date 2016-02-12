@@ -285,10 +285,16 @@ class Options_Pixie_Data_Format {
 
 			if ( Options_Pixie_Data_Format::is_broken_serialized( $data ) ) {
 				$types[] = '!!!';
+			} else {
+				$data = unserialize( $data );
 			}
-		} elseif ( is_object( $data ) ) {
+		}
+
+		if ( is_object( $data ) ) {
 			$types[] = 'O';
-		} elseif ( Options_Pixie_Data_Format::is_json( $data ) ) {
+		}
+
+		if ( Options_Pixie_Data_Format::is_json( $data ) ) {
 			$types[] = 'J';
 		}
 
