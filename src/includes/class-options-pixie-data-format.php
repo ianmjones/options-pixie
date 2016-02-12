@@ -300,4 +300,19 @@ class Options_Pixie_Data_Format {
 
 		return $types;
 	}
+
+	/**
+	 * Checks whether data contains a serialized value, including if base64 encoded.
+	 *
+	 * @param string $data
+	 *
+	 * @return bool
+	 */
+	public static function contains_serialized( $data ) {
+		if ( ! empty( $data ) && in_array( 'S', Options_Pixie_Data_Format::get_data_types( $data ) ) ) {
+			return true;
+		}
+
+		return false;
+	}
 }
