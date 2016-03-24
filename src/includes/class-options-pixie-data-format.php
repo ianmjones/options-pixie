@@ -99,7 +99,7 @@ class Options_Pixie_Data_Format {
 			$value = base64_decode( $data, true );
 			$html .= Options_Pixie_Data_Format::_to_html( $value, $recursion_level );
 		} else {
-			$html .= print_r( $data, true );
+			$html .= esc_html( print_r( $data, true ) );
 		}
 
 		return $html;
@@ -115,7 +115,7 @@ class Options_Pixie_Data_Format {
 	 * @return string
 	 */
 	private static function _highlight_broken_serialized_string( $matches ) {
-		$return = $matches[0];
+		$return = esc_html( $matches[0] );
 		if ( strlen( $matches[2] ) != $matches[1] ) {
 			$return = Options_Pixie_Data_Format::wrap_with_error( $return, __( 'Broken string segment', 'options-pixie' ) );
 		}
