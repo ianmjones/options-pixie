@@ -66,16 +66,9 @@ class Options_Pixie_Admin {
 	 * @since    1.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * An instance of this class should be passed to the run() function
-		 * defined in Options_Pixie_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Options_Pixie_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		if ( ! self::our_screen( get_current_screen(), $this->page_hook ) ) {
+			return;
+		}
 
 		wp_enqueue_style( $this->options_pixie,
 			plugin_dir_url( __FILE__ ) . 'css/options-pixie-admin.css',
@@ -91,16 +84,9 @@ class Options_Pixie_Admin {
 	 * @since    1.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * An instance of this class should be passed to the run() function
-		 * defined in Options_Pixie_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Options_Pixie_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		if ( ! self::our_screen( get_current_screen(), $this->page_hook ) ) {
+			return;
+		}
 
 		wp_enqueue_script( $this->options_pixie,
 			plugin_dir_url( __FILE__ ) . 'js/options-pixie-admin.js',
