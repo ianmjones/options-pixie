@@ -111,7 +111,7 @@ class Options_Pixie_Admin {
 	 * @since 1.0
 	 */
 	public function add_menu_items() {
-		$admin_title = apply_filters( 'options_pixie_admin_title', __( 'Options Pixie', 'options-pixie' ) );
+		$admin_title = apply_filters( 'options_pixie_menu_title', __( 'Options Pixie', 'options-pixie' ) );
 
 		if ( is_multisite() ) {
 			$page_hook = add_submenu_page(
@@ -627,25 +627,35 @@ class Options_Pixie_Admin {
 	public function get_item( $item, $options ) {
 		global $wpdb;
 
-		$blog_id   = empty( $options['blog_id'] ) ? '' : sanitize_key( $options['blog_id'] );
-		$option_id = empty( $options['option_id'] ) ? '' : sanitize_key( $options['option_id'] );
+		$blog_id     = empty( $options['blog_id'] ) ? '' : sanitize_key( $options['blog_id'] );
+		$option_id   = empty( $options['option_id'] ) ? '' : sanitize_key( $options['option_id'] );
+		$option_name = empty( $options['option_name'] ) ? '' : sanitize_key( $options['option_name'] );
+
+		if ( is_numeric( $blog_id ) && is_multisite() ) {
+			$blog_id = (int) $blog_id;
+			switch_to_blog( $blog_id );
+		}
 
 		if ( ! empty( $option_id ) ) {
-			if ( is_numeric( $blog_id ) && is_multisite() ) {
-				$blog_id = (int) $blog_id;
-				switch_to_blog( $blog_id );
-			}
+			$where[] = "{$wpdb->options}.option_id = %d";
+			$prep[]  = $option_id;
+		}
 
+		if ( ! empty( $option_name ) ) {
+			$where[] = "{$wpdb->options}.option_name = %s";
+			$prep[]  = $option_name;
+		}
+
+		if ( ! empty( $where ) && ! empty( $prep ) ) {
 			$query = 'SELECT * FROM ' . $wpdb->options;
-			$query .= " WHERE {$wpdb->options}.option_id = %d";
+			$query .= ' WHERE ' . implode( ' AND ', $where );
 
-			$query = $wpdb->prepare( $query, $option_id );
+			$query = $wpdb->prepare( $query, $prep );
+			$item  = $wpdb->get_row( $query );
+		}
 
-			$item = $wpdb->get_row( $query );
-
-			if ( is_numeric( $blog_id ) && is_multisite() ) {
-				restore_current_blog();
-			}
+		if ( is_numeric( $blog_id ) && is_multisite() ) {
+			restore_current_blog();
 		}
 
 		return $item;

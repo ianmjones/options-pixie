@@ -3,7 +3,7 @@ Contributors: ianmjones
 Donate link: https://www.bytepixie.com/
 Tags: options, wp_options, admin, administration, search, sort, filter
 Requires at least: 3.9
-Tested up to: 4.4.2
+Tested up to: 4.5.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
