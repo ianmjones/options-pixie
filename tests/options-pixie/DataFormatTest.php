@@ -180,36 +180,9 @@ class DataFormatTest extends \WP_UnitTestCase {
 	/**
 	 * @depends test_is_base64_exists
 	 */
-	public function test_is_base64_likes_encoded_string() {
+	public function test_is_base64_dislikes_encoded_string() {
 		$input  = 'I am a string.';
 		$input  = base64_encode( $input );
-		$result = Options_Pixie_Data_Format::is_base64( $input );
-		$this->assertTrue( $result );
-	}
-
-	/**
-	 * @depends test_is_base64_exists
-	 */
-	public function test_is_base64_dislikes_plain_string() {
-		$input  = 'I am a string.';
-		$result = Options_Pixie_Data_Format::is_base64( $input );
-		$this->assertFalse( $result );
-	}
-
-	/**
-	 * @depends test_is_base64_exists
-	 */
-	public function test_is_base64_dislikes_empty_string() {
-		$input  = '';
-		$result = Options_Pixie_Data_Format::is_base64( $input );
-		$this->assertFalse( $result );
-	}
-
-	/**
-	 * @depends test_is_base64_exists
-	 */
-	public function test_is_base64_dislikes_array() {
-		$input  = array( 'not' => 'string' );
 		$result = Options_Pixie_Data_Format::is_base64( $input );
 		$this->assertFalse( $result );
 	}
