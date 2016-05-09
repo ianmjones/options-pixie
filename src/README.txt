@@ -79,6 +79,7 @@ Nope (We're thinking about a Pro plugin for that, [vote for it here](https://www
 * Change: "Option ID" column moved away from first column to get around a bug in WordPress 4.3's mobile view.
 * Change: Records now sorted by the "Option Name" column by default.
 * Change: Values from the `option_value` field are now HTML escaped.
+* Change: Base 64 encoded strings are now identified as well as base 64 encoded expandable types.
 * Fix: Ensure default sort column shows the sort indicator on very first usage.
 * Fix: "O" now shown correctly in Type column when value is a serialized Object.
 * Fix: Stopped Option Pixie's CSS and JavaScript being included in other admin pages.

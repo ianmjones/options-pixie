@@ -207,7 +207,7 @@ class Options_Pixie_Admin {
 							<strong>"S"</strong> is for Serialized data.<br>
 							<strong>"J"</strong> is for JSON data.<br>
 							<strong>"O"</strong> is for Object.<br>
-							<strong>"b64"</strong> is for Base 64 encoded data. At present Options Pixie can only determine if data has been Base 64 encoded if the contained data is Serialized, JSON or an Object.<br>
+							<strong>"b64"</strong> is for Base 64 encoded data.<br>
 							<strong>"!!!"</strong> is shown when the Serialized value is broken in some way, usually by string length indicators not matching the length of the string it partners.<br>
 							This column can not be sorted as it is derived.
 							</dd>

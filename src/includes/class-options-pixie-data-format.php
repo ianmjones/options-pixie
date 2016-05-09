@@ -226,13 +226,8 @@ class Options_Pixie_Data_Format {
 	 * @return bool
 	 */
 	public static function is_base64( $data ) {
-		if ( is_string( $data ) && base64_encode( base64_decode( $data, true ) ) === $data ) {
-
-			$data = base64_decode( $data, true );
-
-			if ( is_serialized( $data ) || is_object( $data ) || Options_Pixie_Data_Format::is_json( $data ) ) {
-				return true;
-			}
+		if ( ! empty( $data ) && is_string( $data ) && base64_encode( base64_decode( $data, true ) ) === $data ) {
+			return true;
 		}
 
 		return false;
