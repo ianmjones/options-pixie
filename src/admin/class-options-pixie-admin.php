@@ -202,12 +202,12 @@ class Options_Pixie_Admin {
 							<dd>The actual value for the record, can be any format that can be stored in a string.</dd>
 							<dt>Type</dt>
 							<dd>
-							A column created by Options Pixie to show the type of data being stored in the Option Value. This column is not stored in the database.<br>
+							A column created by the plugin to show the type of data being stored in the Option Value. This column is not stored in the database.<br>
 							When the type is blank the Option Value is general text or numeric data.<br>
 							<strong>"S"</strong> is for Serialized data.<br>
 							<strong>"J"</strong> is for JSON data.<br>
 							<strong>"O"</strong> is for Object.<br>
-							<strong>"b64"</strong> is for Base 64 encoded data. At present Options Pixie can only determine if data has been Base 64 encoded if the contained data is Serialized, JSON or an Object.<br>
+							<strong>"b64"</strong> is for Base 64 encoded data. At present the plugin can only determine if data has been Base 64 encoded if the contained data is Serialized, JSON or an Object.<br>
 							<strong>"!!!"</strong> is shown when the Serialized value is broken in some way, usually by string length indicators not matching the length of the string it partners.<br>
 							This column can not be sorted as it is derived.
 							</dd>
@@ -229,7 +229,7 @@ class Options_Pixie_Admin {
 					<h3>Search</h3>
 					<p>
 						You can search and filter the shown options records by entering text into the Search box on the top right of the table and using the "Search" button.<br>
-						When you use the search box Options Pixie will show all records that either have the same Option ID if numeric, or where the Option Name or Option Value contains the search text.<br>
+						When you use the search box, the plugin will show all records that either have the same Option ID if numeric, or where the Option Name or Option Value contains the search text.<br>
 					</p>
 					<p>
 						You can also use the "All", "Permanent" and "Transient" links to restrict the records being shown to those types of records.
@@ -251,7 +251,7 @@ class Options_Pixie_Admin {
 					</p>
 					<p>
 						The Rich View with icon <span class="dashicons excerpt-view"></span> shows the more complex data in Option Values in an easier to understand manner.<br>
-						When the data in the Option Value can be converted into an array of values Options Pixie will show the keys and values, and also expansion controls when there are multiple levels.
+						When the data in the Option Value can be converted into an array of values the plugin will show the keys and values, and also expansion controls when there are multiple levels.
 					</p>
 				',
 				'options-pixie'
