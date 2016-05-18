@@ -66,8 +66,11 @@ Nope, but we have a Pro addon for that called [Options Pixie Pro](https://www.by
 
 == Screenshots ==
 
-1. Options Pixie Rich View.
-2. Options Pixie List View.
+1. Rich View.
+2. List View.
+3. Multisites Supported.
+4. Screen Options Pane.
+5. Help Pane.
 
 == Changelog ==
 
