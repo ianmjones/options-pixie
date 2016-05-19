@@ -17,7 +17,7 @@ if ( 'Y' == trim( fgets( STDIN ) ) ) {
 
 	echo 'Commit to WP.org? (Y/n)? ';
 	if ( 'Y' == trim( fgets( STDIN ) ) ) {
-		system( "svn ci svn/ -m 'Deploy version $version'" );
+		system( "svn ci --username ianmjones svn/ -m 'Deploy version $version'" );
 	}
 }
 
