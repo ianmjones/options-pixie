@@ -66,16 +66,9 @@ class Options_Pixie_Admin {
 	 * @since    1.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * An instance of this class should be passed to the run() function
-		 * defined in Options_Pixie_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Options_Pixie_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		if ( ! self::our_screen( get_current_screen(), $this->page_hook ) ) {
+			return;
+		}
 
 		wp_enqueue_style( $this->options_pixie,
 			plugin_dir_url( __FILE__ ) . 'css/options-pixie-admin.css',
@@ -91,16 +84,9 @@ class Options_Pixie_Admin {
 	 * @since    1.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * An instance of this class should be passed to the run() function
-		 * defined in Options_Pixie_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Options_Pixie_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		if ( ! self::our_screen( get_current_screen(), $this->page_hook ) ) {
+			return;
+		}
 
 		wp_enqueue_script( $this->options_pixie,
 			plugin_dir_url( __FILE__ ) . 'js/options-pixie-admin.js',
@@ -125,7 +111,7 @@ class Options_Pixie_Admin {
 	 * @since 1.0
 	 */
 	public function add_menu_items() {
-		$admin_title = apply_filters( 'options_pixie_admin_title', __( 'Options Pixie', 'options-pixie' ) );
+		$admin_title = apply_filters( 'options_pixie_menu_title', __( 'Options Pixie', 'options-pixie' ) );
 
 		if ( is_multisite() ) {
 			$page_hook = add_submenu_page(
@@ -216,12 +202,12 @@ class Options_Pixie_Admin {
 							<dd>The actual value for the record, can be any format that can be stored in a string.</dd>
 							<dt>Type</dt>
 							<dd>
-							A column created by Options Pixie to show the type of data being stored in the Option Value. This column is not stored in the database.<br>
+							A column created by the plugin to show the type of data being stored in the Option Value. This column is not stored in the database.<br>
 							When the type is blank the Option Value is general text or numeric data.<br>
 							<strong>"S"</strong> is for Serialized data.<br>
 							<strong>"J"</strong> is for JSON data.<br>
 							<strong>"O"</strong> is for Object.<br>
-							<strong>"b64"</strong> is for Base 64 encoded data. At present Options Pixie can only determine if data has been Base 64 encoded if the contained data is Serialized, JSON or an Object.<br>
+							<strong>"b64"</strong> is for Base 64 encoded data. At present the plugin can only determine if data has been Base 64 encoded if the contained data is Serialized, JSON or an Object.<br>
 							<strong>"!!!"</strong> is shown when the Serialized value is broken in some way, usually by string length indicators not matching the length of the string it partners.<br>
 							This column can not be sorted as it is derived.
 							</dd>
@@ -243,7 +229,7 @@ class Options_Pixie_Admin {
 					<h3>Search</h3>
 					<p>
 						You can search and filter the shown options records by entering text into the Search box on the top right of the table and using the "Search" button.<br>
-						When you use the search box Options Pixie will show all records that either have the same Option ID if numeric, or where the Option Name or Option Value contains the search text.<br>
+						When you use the search box, the plugin will show all records that either have the same Option ID if numeric, or where the Option Name or Option Value contains the search text.<br>
 					</p>
 					<p>
 						You can also use the "All", "Permanent" and "Transient" links to restrict the records being shown to those types of records.
@@ -265,7 +251,7 @@ class Options_Pixie_Admin {
 					</p>
 					<p>
 						The Rich View with icon <span class="dashicons excerpt-view"></span> shows the more complex data in Option Values in an easier to understand manner.<br>
-						When the data in the Option Value can be converted into an array of values Options Pixie will show the keys and values, and also expansion controls when there are multiple levels.
+						When the data in the Option Value can be converted into an array of values the plugin will show the keys and values, and also expansion controls when there are multiple levels.
 					</p>
 				',
 				'options-pixie'
@@ -345,8 +331,8 @@ class Options_Pixie_Admin {
 	 * @return mixed
 	 */
 	public function manage_screen_columns( $columns ) {
-		$columns['option_id'] = __( 'Option ID', 'options-pixie' );
 		$columns['type']      = __( 'Type', 'options-pixie' );
+		$columns['option_id'] = __( 'Option ID', 'options-pixie' );
 		$columns['autoload']  = __( 'Autoload', 'options-pixie' );
 
 		return $columns;
@@ -358,7 +344,7 @@ class Options_Pixie_Admin {
 	 * @since 1.0
 	 */
 	public function display_admin_page() {
-		$options_pixie_list_table = new Options_Pixie_List_Table();
+		$options_pixie_list_table = new Options_Pixie_List_Table( $this->page_hook );
 		$options_pixie_list_table->prepare_items();
 
 		include plugin_dir_path( __FILE__ ) . 'partials/options-pixie-admin-display.php';
@@ -641,25 +627,35 @@ class Options_Pixie_Admin {
 	public function get_item( $item, $options ) {
 		global $wpdb;
 
-		$blog_id   = empty( $options['blog_id'] ) ? '' : sanitize_key( $options['blog_id'] );
-		$option_id = empty( $options['option_id'] ) ? '' : sanitize_key( $options['option_id'] );
+		$blog_id     = empty( $options['blog_id'] ) ? '' : sanitize_key( $options['blog_id'] );
+		$option_id   = empty( $options['option_id'] ) ? '' : sanitize_key( $options['option_id'] );
+		$option_name = empty( $options['option_name'] ) ? '' : sanitize_key( $options['option_name'] );
+
+		if ( is_numeric( $blog_id ) && is_multisite() ) {
+			$blog_id = (int) $blog_id;
+			switch_to_blog( $blog_id );
+		}
 
 		if ( ! empty( $option_id ) ) {
-			if ( is_numeric( $blog_id ) && is_multisite() ) {
-				$blog_id = (int) $blog_id;
-				switch_to_blog( $blog_id );
-			}
+			$where[] = "{$wpdb->options}.option_id = %d";
+			$prep[]  = $option_id;
+		}
 
+		if ( ! empty( $option_name ) ) {
+			$where[] = "{$wpdb->options}.option_name = %s";
+			$prep[]  = $option_name;
+		}
+
+		if ( ! empty( $where ) && ! empty( $prep ) ) {
 			$query = 'SELECT * FROM ' . $wpdb->options;
-			$query .= " WHERE {$wpdb->options}.option_id = %d";
+			$query .= ' WHERE ' . implode( ' AND ', $where );
 
-			$query = $wpdb->prepare( $query, $option_id );
+			$query = $wpdb->prepare( $query, $prep );
+			$item  = $wpdb->get_row( $query );
+		}
 
-			$item = $wpdb->get_row( $query );
-
-			if ( is_numeric( $blog_id ) && is_multisite() ) {
-				restore_current_blog();
-			}
+		if ( is_numeric( $blog_id ) && is_multisite() ) {
+			restore_current_blog();
 		}
 
 		return $item;
@@ -770,5 +766,25 @@ class Options_Pixie_Admin {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Handler for the options_pixie_admin_page_footer filter.
+	 *
+	 * @param string $content Current footer content to be appended to, or replaced.
+	 *
+	 * @return string
+	 */
+	public function get_admin_page_footer( $content ) {
+		$content .= '
+			<div class="clear">
+				<p>
+					Like Options Pixie? You\'ll <strong>LOVE</strong> <a href="https://www.bytepixie.com/options-pixie-pro/" target="_blank">Options Pixie Pro</a>. <strong>Add</strong>, <strong>edit</strong>, <strong>delete</strong> and <strong>fix</strong> your WordPress site\'s options records with style.
+					<a href="https://www.bytepixie.com/options-pixie-pro/" class="button button-primary regular" target="_blank">Buy Now!</a>
+				</p>
+			</div>
+			';
+
+		return $content;
 	}
 }

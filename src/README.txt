@@ -3,7 +3,7 @@ Contributors: ianmjones
 Donate link: https://www.bytepixie.com/
 Tags: options, wp_options, admin, administration, search, sort, filter
 Requires at least: 3.9
-Tested up to: 4.3
+Tested up to: 4.5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ With Options Pixie you can find out what is really going on with your WordPress 
 
 Your wp_options table holds nearly all the settings that govern how your WordPress site looks and works, and if things aren't working quite as expected it's good to be able to peak into these records right in your site's admin dashboard.
 
-Options Pixie highlights broken serialized values, showing you exactly where that string buried deep in a setting and supposed to be say 128 characters long is actually only 127, something that is otherwise hard to spot.
+Options Pixie highlights broken serialized values, showing you exactly where that string buried deep in a setting and supposed to be say 128 characters long is actually only 127, something that is otherwise very hard to spot.
 
 The Rich View takes those long unwieldy strings of serialized or JSON data and turns them into neat expandable lists of key/value pairs, much easier to read and understand.
 
@@ -58,18 +58,34 @@ Yep.
 
 = Can I add/edit/delete options records with Options Pixie? =
 
-Nope (We're thinking about a Pro plugin for that, [vote for it here](https://www.bytepixie.com/options-pixie-pro).
+Nope, but we have a Pro addon for that called [Options Pixie Pro](https://www.bytepixie.com/options-pixie-pro).
 
 = Can I fix broken serialized options records with Options Pixie? =
 
-Nope (We're thinking about a Pro plugin for that, [vote for it here](https://www.bytepixie.com/options-pixie-pro).
+Nope, but we have a Pro addon for that called [Options Pixie Pro](https://www.bytepixie.com/options-pixie-pro).
 
 == Screenshots ==
 
-1. Options Pixie List View.
-2. Options Pixie Rich View.
+1. Rich View.
+2. List View.
+3. Multisites Supported.
+4. Screen Options Pane.
+5. Help Pane.
 
 == Changelog ==
+
+= 1.1 =
+* New: There is now a small promo for Options Pixie Pro in the footer of Option Pixie.
+* Change: Header text now complies with WordPress 4.3+ changes, but remains backwards compatible.
+* Change: Primary column set to "Option Name" in WordPress 4.3+.
+* Change: Security improvements.
+* Change: "Option ID" column moved away from first column to get around a bug in WordPress 4.3's mobile view.
+* Change: Records now sorted by the "Option Name" column by default.
+* Change: Values from the `option_value` field are now HTML escaped.
+* Fix: Ensure default sort column shows the sort indicator on very first usage.
+* Fix: "O" now shown correctly in Type column when value is a serialized Object.
+* Fix: Stopped Option Pixie's CSS and JavaScript being included in other admin pages.
+* Fix: Fixed problem with browser URL not being updated to match current search.
 
 = 1.0.1 =
 * Fix: Removed extra "/" displayed in multisite selector values for path based multisites.

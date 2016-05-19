@@ -10,11 +10,7 @@ then
 	bash ${RUN_CMD} -c /tmp/clover.xml
 
 	# Send coverage to Scrutinizer CI.
-	curl -sSL https://scrutinizer-ci.com/ocular.phar -o ocular.phar
-	php ocular.phar code-coverage:upload --format=php-clover /tmp/clover.xml
-
-	# Quick check that coverage hasn't dropped.
-	tests/bin/coverage-checker.php /tmp/clover.xml 5
+	php vendor/bin/coveralls -v -c tests/cfg/.coveralls-travis.yml -x /tmp/clover.xml
 else
 	bash ${RUN_CMD}
 fi
