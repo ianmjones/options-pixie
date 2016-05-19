@@ -69,7 +69,7 @@ class Options_Pixie {
 	public function __construct() {
 
 		$this->options_pixie = 'options-pixie';
-		$this->version       = '1.0.2-dev';
+		$this->version       = '1.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -166,6 +166,7 @@ class Options_Pixie {
 		}
 		$this->loader->add_action( 'options_pixie_admin_page_hooked', $plugin_admin, 'admin_page_hooked' );
 		$this->loader->add_filter( 'set-screen-option', $plugin_admin, 'set_records_per_page_option', 10, 3 );
+		$this->loader->add_filter( 'options_pixie_admin_page_footer', $plugin_admin, 'get_admin_page_footer' );
 
 		$this->loader->add_filter( 'options_pixie_get_query_string', $plugin_admin, 'get_query_string', 10, 2 );
 		$this->loader->add_filter( 'options_pixie_get_count', $plugin_admin, 'get_count', 10, 2 );
@@ -221,5 +222,25 @@ class Options_Pixie {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Returns the admin url that can be used to update the plugin.
+	 *
+	 * @return string
+	 */
+	public function get_update_url() {
+		$basename = plugin_basename( plugin_dir_path( dirname( __FILE__ ) ) . '/options-pixie.php' );
+
+		return wp_nonce_url( network_admin_url( 'update.php?action=upgrade-plugin&plugin=' . urlencode( $basename ) ), 'upgrade-plugin_' . $basename );
+	}
+
+	/**
+	 * Returns an HTML link that can be used to update the plugin.
+	 *
+	 * @return string
+	 */
+	public function get_update_link() {
+		return sprintf( '<a href="%1$s">%2$s</a>', $this->get_update_url(), _x( 'Update Options Pixie Now', 'Download and install a new version of the plugin', 'options-pixie' ) );
 	}
 }

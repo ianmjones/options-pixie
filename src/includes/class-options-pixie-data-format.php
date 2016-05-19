@@ -99,7 +99,7 @@ class Options_Pixie_Data_Format {
 			$value = base64_decode( $data, true );
 			$html .= Options_Pixie_Data_Format::_to_html( $value, $recursion_level );
 		} else {
-			$html .= print_r( $data, true );
+			$html .= esc_html( print_r( $data, true ) );
 		}
 
 		return $html;
@@ -115,7 +115,7 @@ class Options_Pixie_Data_Format {
 	 * @return string
 	 */
 	private static function _highlight_broken_serialized_string( $matches ) {
-		$return = $matches[0];
+		$return = esc_html( $matches[0] );
 		if ( strlen( $matches[2] ) != $matches[1] ) {
 			$return = Options_Pixie_Data_Format::wrap_with_error( $return, __( 'Broken string segment', 'options-pixie' ) );
 		}
@@ -226,7 +226,7 @@ class Options_Pixie_Data_Format {
 	 * @return bool
 	 */
 	public static function is_base64( $data ) {
-		if ( is_string( $data ) && base64_encode( base64_decode( $data, true ) ) === $data ) {
+		if ( ! empty( $data ) && is_string( $data ) && base64_encode( base64_decode( $data, true ) ) === $data ) {
 
 			$data = base64_decode( $data, true );
 
@@ -285,13 +285,34 @@ class Options_Pixie_Data_Format {
 
 			if ( Options_Pixie_Data_Format::is_broken_serialized( $data ) ) {
 				$types[] = '!!!';
+			} else {
+				$data = unserialize( $data );
 			}
-		} elseif ( is_object( $data ) ) {
+		}
+
+		if ( is_object( $data ) ) {
 			$types[] = 'O';
-		} elseif ( Options_Pixie_Data_Format::is_json( $data ) ) {
+		}
+
+		if ( Options_Pixie_Data_Format::is_json( $data ) ) {
 			$types[] = 'J';
 		}
 
 		return $types;
+	}
+
+	/**
+	 * Checks whether data contains a serialized value, including if base64 encoded.
+	 *
+	 * @param string $data
+	 *
+	 * @return bool
+	 */
+	public static function contains_serialized( $data ) {
+		if ( ! empty( $data ) && in_array( 'S', Options_Pixie_Data_Format::get_data_types( $data ) ) ) {
+			return true;
+		}
+
+		return false;
 	}
 }

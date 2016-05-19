@@ -478,14 +478,20 @@ class Options_Pixie_List_Table extends WP_List_Table {
 		update_user_option( $user, 'options_pixie_options', $options );
 
 		// Update the current URI with the new options.
+		$redirect               = false;
+		$orig_request_uri       = $_SERVER['REQUEST_URI'];
 		$_SERVER['REQUEST_URI'] = add_query_arg( $options, $_SERVER['REQUEST_URI'] );
+
+		if ( $_SERVER['REQUEST_URI'] !== $orig_request_uri ) {
+			$redirect = true;
+		}
 
 		// Add nonce to URL.
 		$nonce                  = wp_create_nonce( 'options-pixie-nonce' );
 		$_SERVER['REQUEST_URI'] = add_query_arg( '_options_pixie_nonce', $nonce, $_SERVER['REQUEST_URI'] );
 
 		// If we didn't get a nonce value redirect so that it is set and WP_List_Table's reliance on $_GET is satisfied.
-		if ( ! $verified ) {
+		if ( $redirect ) {
 			wp_redirect( $_SERVER['REQUEST_URI'] );
 		}
 
