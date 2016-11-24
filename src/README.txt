@@ -80,6 +80,11 @@ Nope, but we have a Pro addon for that called [Options Pixie Pro](https://www.by
 
 == Changelog ==
 
+= 1.1.1 =
+* Fix: Fixed "PHP Notice: Trying to get property of non-object" in debug log when trying to expand already deleted record.
+* Change: Minor improvements to README and wp.org banner image.
+* Tested: WordPress 4.7.
+
 = 1.1 =
 * New: There is now a small promo for Options Pixie Pro in the footer of Option Pixie.
 * Change: Header text now complies with WordPress 4.3+ changes, but remains backwards compatible.
@@ -97,7 +102,7 @@ Nope, but we have a Pro addon for that called [Options Pixie Pro](https://www.by
 * Fix: Removed extra "/" displayed in multisite selector values for path based multisites.
 * Fix: Remember Search & Sort checkbox now shown properly in Screen Options panel for multisites.
 * Fix: Very first Search or Switch Site button usage now works as expected.
-* Tested: WordPress 4.3
+* Tested: WordPress 4.3.
 
 = 1.0 =
 * Initial release.
