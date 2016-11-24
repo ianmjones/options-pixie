@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RUN_CMD="tests/bin/run-unittests.sh -d wordpress_test -u travis -h 127.0.0.1"
+RUN_CMD="tests/bin/run-unittests.sh -d wordpress_test -u root"
 
 #
 # Only run coverage check for one build as it's quite slow.
