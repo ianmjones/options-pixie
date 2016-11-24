@@ -22,3 +22,4 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_options_pixie_plugin' );
 require $_tests_dir . '/includes/bootstrap.php';
 
 define( 'PHPUNIT_RUNNER', true );
+define( 'WP_DEFAULT_THEME', 'default' );
