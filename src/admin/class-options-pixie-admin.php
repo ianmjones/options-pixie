@@ -530,13 +530,16 @@ class Options_Pixie_Admin {
 		$column    = sanitize_key( $_REQUEST['column'] );
 		$collapsed = sanitize_key( $_REQUEST['collapsed'] );
 
-		$item                 = apply_filters( 'options_pixie_get_item', null, array( 'blog_id' => $blog_id, 'option_id' => $option_id ) );
-		$options['column']    = $column;
-		$options['collapsed'] = ( 'true' === $collapsed ) ? false : true;
-		$value                = apply_filters( 'options_pixie_column_display', $item->{$column}, $item, $options );
-		$row_actions          = apply_filters( 'options_pixie_column_row_actions', $item->{$column}, $item, $options );
-		$row_actions          = apply_filters( 'options_pixie_format_row_actions', $row_actions );
-		echo $value . $row_actions;
+		$item = apply_filters( 'options_pixie_get_item', null, array( 'blog_id' => $blog_id, 'option_id' => $option_id ) );
+
+		if ( ! empty( $item ) ) {
+			$options['column']    = $column;
+			$options['collapsed'] = ( 'true' === $collapsed ) ? false : true;
+			$value                = apply_filters( 'options_pixie_column_display', $item->{$column}, $item, $options );
+			$row_actions          = apply_filters( 'options_pixie_column_row_actions', $item->{$column}, $item, $options );
+			$row_actions          = apply_filters( 'options_pixie_format_row_actions', $row_actions );
+			echo $value . $row_actions;
+		}
 		wp_die();
 	}
 
