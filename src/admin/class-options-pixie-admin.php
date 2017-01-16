@@ -728,7 +728,7 @@ class Options_Pixie_Admin {
 				$output .= '<select name="blog_id" id="blog-id-selector-top" autocomplete="off">';
 				$output .= '<option value="" disabled="disabled">&mdash; ' . _x( 'Site', 'Site to view records for', 'options-pixie' ) . ' &mdash;</option>';
 
-				foreach ( wp_get_sites( array( 'limit' => 0 ) ) as $blog ) {
+				foreach ( $this->_get_sites( array( 'limit' => 0 ) ) as $blog ) {
 					$blog_id     = empty( $blog['blog_id'] ) ? '' : $blog['blog_id'];
 					$description = untrailingslashit( trim( $blog['domain'] ) . trim( $blog['path'] ) );
 
@@ -789,5 +789,31 @@ class Options_Pixie_Admin {
 			';
 
 		return $content;
+	}
+
+	/**
+	 * Return an array of sites for a network or networks.
+	 *
+	 * @param array $args
+	 *
+	 * @return array
+	 */
+	private function _get_sites( $args ) {
+		global $wp_version;
+
+		$results = array();
+
+		if ( version_compare( $wp_version, '4.6-dev', '<' ) ) {
+			$results = wp_get_sites( $args );
+		} else {
+			$_sites = get_sites( $args );
+
+			foreach ( $_sites as $_site ) {
+				$_site     = get_site( $_site );
+				$results[] = $_site->to_array();
+			}
+		}
+
+		return $results;
 	}
 }

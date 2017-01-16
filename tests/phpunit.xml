@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<phpunit colors="true" bootstrap="cfg/bootstrap.php">
+<phpunit colors="true" backupGlobals="false" bootstrap="cfg/bootstrap.php">
 	<testsuites>
 		<testsuite name="test-it-works">
 			<directory>test-it-works</directory>
