@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: ianmjones
 Donate link: https://www.bytepixie.com/
-Tags: options, wp_options, admin, administration, search, sort, filter
+Tags: options, wp_options, admin, administration, search, sort, filter, view
 Requires at least: 3.9
-Tested up to: 4.7
+Tested up to: 4.7.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -79,6 +79,9 @@ Nope, but we have a Pro addon for that called [Options Pixie Pro](https://www.by
 5. Help Pane.
 
 == Changelog ==
+
+= 1.1.2 =
+* Fix: Deprecation notice for `wp_get_sites` on WP 4.6+.
 
 = 1.1.1 =
 * Fix: Fixed "PHP Notice: Trying to get property of non-object" in debug log when trying to expand already deleted record.
