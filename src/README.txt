@@ -3,7 +3,7 @@ Contributors: ianmjones
 Donate link: https://www.bytepixie.com/
 Tags: options, wp_options, admin, administration, search, sort, filter, view
 Requires at least: 3.9
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,6 +11,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 List, sort, search and view your WordPress site's options records with style.
 
 == Description ==
+
+IMPORTANT: This plugin is now deprecated and will no longer be updated, go use [WP Table Pixie](https://wordpress.org/plugins/wp-table-pixie/) instead!
 
 List, filter, sort and view options records, even serialized and base64 encoded values.
 
@@ -64,11 +66,11 @@ Yep.
 
 = Can I add/edit/delete options records with Options Pixie? =
 
-Nope, but we have a Pro addon for that called [Options Pixie Pro](https://www.bytepixie.com/options-pixie-pro).
+Nope, but we have a Pro upgrade of [WP Table Pixie](https://www.bytepixie.com/wp-table-pixie/) that adds EDIT ALL THE THINGS!
 
 = Can I fix broken serialized options records with Options Pixie? =
 
-Nope, but we have a Pro addon for that called [Options Pixie Pro](https://www.bytepixie.com/options-pixie-pro).
+Nope, but we have a Pro upgrade of [WP Table Pixie](https://www.bytepixie.com/wp-table-pixie/) that adds EDIT ALL THE THINGS!
 
 == Screenshots ==
 
