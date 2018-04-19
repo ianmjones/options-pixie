@@ -2,6 +2,8 @@
 [![Build Status](https://travis-ci.org/bytepixie/options-pixie.svg?branch=develop)](https://travis-ci.org/bytepixie/options-pixie) [![Coverage Status](https://coveralls.io/repos/github/bytepixie/options-pixie/badge.svg?branch=develop)](https://coveralls.io/github/bytepixie/options-pixie?branch=develop) [![License](https://img.shields.io/badge/license-GPL--2.0%2B-green.svg)](https://github.com/bytepixie/options-pixie/blob/master/src/LICENSE.txt)
 
 ## Description
+IMPORTANT: This plugin is now deprecated and will no longer be updated, go use [WP Table Pixie](https://wordpress.org/plugins/wp-table-pixie/) instead!
+
 List, filter, sort and view options records, even serialized and base64 encoded values.
 
 * List, sort and search options
